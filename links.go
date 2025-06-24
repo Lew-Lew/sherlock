@@ -6,8 +6,9 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/Lew-Lew/sherlock/style"
 	"golang.org/x/net/html"
+
+	"github.com/Lew-Lew/sherlock/style"
 )
 
 type ResultLink struct {
