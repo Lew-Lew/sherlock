@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+
+	"github.com/Lew-Lew/sherlock/app"
+	"github.com/Lew-Lew/sherlock/linter/link"
 )
 
 func main() {
@@ -11,14 +14,14 @@ func main() {
 		return
 	}
 
-	sherlock := NewSherlock(os.Args[1])
+	sherlock := app.NewSherlock(
+		os.Args[1],
+		[]app.Linter{
+			link.NewLinter(),
+		},
+	)
 
-	if err := sherlock.FetchSitemap(); err != nil {
-		fmt.Printf("Error fetching sitemap: %v\n", err)
-		os.Exit(1)
-	}
-
-	if err := sherlock.CheckLinks(); err != nil {
+	if err := sherlock.Run(); err != nil {
 		fmt.Printf("Error checking links: %v\n", err)
 		os.Exit(1)
 	}
